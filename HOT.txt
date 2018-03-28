@@ -1,0 +1,34 @@
+﻿heat_template_version: 2016-04-08
+
+description: Simple template to deploy a single compute instance
+
+
+parameters:
+  password:
+    type: string
+    label: password
+    description: admin password
+    hidden: False
+resources:
+  1st_instance:
+    type: OS::Nova::Server
+    properties:
+      key_name: key1st
+      admin_user: sampleuser
+      image: cloud-ubuntu-15.04
+      flavor: m1.small
+      networks:
+        - network: private-net
+      user_data:
+        str_replace:
+          template: |
+            #!/bin/bash
+            echo "Setting  password to  " $password           
+            echo $password |passwd --stdin sampleuser
+
+          params:
+            $password: { get_param: password }
+
+
+
+
