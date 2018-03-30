@@ -13,7 +13,7 @@ resources:
      properties:
        name: test-subnet1
        network: test_net1
-       dns_domain: 172.18.176.6
+       dns_nameservers: 172.18.176.6
        
       
       
